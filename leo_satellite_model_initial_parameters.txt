@@ -1,0 +1,64 @@
+==============================================================================
+MA 532: NUMERICAL LINEAR ALGEBRA FOR ENGINEERS
+TOPIC 1: LEO SATELLITE NAVIGATION & STATE ESTIMATION
+INITIALIZATION PARAMETERS & CONSTANTS DATA
+==============================================================================
+
+1. PHYSICAL & PLANETARY CONSTANTS
+------------------------------------------------------------------------------
+Standard Gravitational Parameter (mu_earth) : 3.986004418e14  [m^3 / s^2]
+Mean Equatorial Radius of Earth (R_E)       : 6378137.0       [m]
+Earth Rotation Rate (omega_earth)           : 7.292115e-5     [rad / s]
+Speed of Light (c)                          : 299792458.0     [m / s]
+Astronomical Unit (1 AU)                    : 149597870700.0  [m]
+Solar Flux Constant (S_0)                   : 1367.0          [W / m^2]
+
+
+2. SAMPLE SATELLITE PROPERTIES (LEO CLASS)
+------------------------------------------------------------------------------
+Spacecraft Dry Mass (m)                     : 100.0           [kg]
+Cross-sectional Area (A)                    : 2.0             [m^2]
+Area-to-Mass Ratio (A / m)                  : 0.02            [m^2 / kg]
+Drag Coefficient (C_D)                      : 2.2             [dimensionless]
+Reflectivity Coefficient (C_R)              : 1.4             [dimensionless]
+
+
+3. INITIAL STATE VECTOR (t0 = 0 sec, Altitude ~500 km)
+------------------------------------------------------------------------------
+Position Vector [rx, ry, rz]^T:
+  rx =  6878137.000   [m]
+  ry =        0.000   [m]
+  rz =        0.000   [m]
+
+Velocity Vector [vx, vy, vz]^T:
+  vx =        0.000   [m / s]
+  vy =     7612.600   [m / s]
+  vz =        0.000   [m / s]
+
+
+4. ATMOSPHERIC DRAG MODEL (EXPONENTIAL ATMOSPHERE)
+------------------------------------------------------------------------------
+Reference Altitude (h_0)                    : 500000.0        [m] (500 km)
+Base Atmospheric Density (rho_0)            : 6.048e-14       [kg / m^3]
+Atmospheric Scale Height (H)                : 60600.0         [m] (60.6 km)
+
+Formula:
+  rho(h) = rho_0 * exp(-(h - h_0) / H)
+  a_drag = -0.5 * rho * (C_D * A / m) * ||v_rel|| * v_rel
+
+
+5. SOLAR RADIATION PRESSURE (SRP) MODEL
+------------------------------------------------------------------------------
+Solar Radiation Pressure at 1 AU (P_srp)    : 4.560e-6        [N / m^2]
+Shadow Function Coefficient (nu)            : 1.0 (Sunlight) / 0.0 (Eclipse)
+
+Formula:
+  a_srp = -nu * C_R * (A / m) * P_srp * (AU / r_sun)^2 * u_sun
+
+
+6. SENSOR MEASUREMENT NOISE (FOR SIMULATION INPUT VECTOR b)
+------------------------------------------------------------------------------
+GPS Position White Noise (Sigma_r)          : 5.0             [m]
+GPS Velocity White Noise (Sigma_v)          : 0.05            [m / s]
+Sampling Interval (dt)                      : 10.0            [seconds]
+==============================================================================
