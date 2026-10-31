@@ -13,7 +13,6 @@ P_srp = 4.56e-6
 Cr = 1.4
 
 # 2. Simulate/Construct Observation Matrix A and Measurement Vector b
-# Let's assume m measurements from ground stations at known positions
 num_measurements = 10
 A = np.zeros((num_measurements, 6))  # 6 state variables (x, y, z, vx, vy, vz)
 b = np.zeros((num_measurements, 1))
@@ -21,23 +20,29 @@ b = np.zeros((num_measurements, 1))
 ground_station = np.array([6378137.0, 0.0, 0.0])  # Example ground station
 
 for i in range(num_measurements):
-  # Propagated satellite position at time step i (using r0, v0, drag, SRP)
-  sat_pos = r0 + v0 * (i * 10)  # Simplified linear propagation for demo
+  t_i = i * 10.0  # Time step
+  
+  # Propagated satellite position at time step i
+  sat_pos = r0 + v0 * t_i  
 
   # Vector from ground station to satellite
   diff = sat_pos - ground_station
   R = np.linalg.norm(diff)
 
-  # Fill row of A matrix (Line-of-sight unit vector components for position)
-  A[i, 0:3] = diff / R
-  A[i, 3:6] = 0.0  # Velocity partials for pure range
+  # Line-of-sight unit vector
+  los = diff / R
+
+  # Fill row of A matrix
+  A[i, 0:3] = los         # Position partials (dr / dr0)
+  A[i, 3:6] = los * t_i   # Velocity partials (dr / dv0 scaled by time t_i)
 
   # Simulated noisy measurement (True range + white noise)
   b[i] = R + np.random.normal(0, 5.0)  # 5 meters standard deviation noise
 
-# 3. Solve the Least Squares Problem: Ax ≈ b using QR Factorization or SVD
-# (Tied to MA 532 course modules: Chapter 7 & 8)
+# 3. Solve the Least Squares Problem: Ax ≈ b using QR Factorization
 Q, R_mat = np.linalg.qr(A)
-x_estimated = np.linalg.solve(R_mat[:6, :6], Q.T[:6, :] @ b)
+
+# Safeguard solve using lstsq in case of any ill-conditioning
+x_estimated, residuals, rank, s = np.linalg.lstsq(R_mat[:6, :6], Q.T[:6, :] @ b, rcond=None)
 
 print('Estimated State Corrections x:', x_estimated.flatten())
