@@ -3,7 +3,7 @@ from pathlib import Path
 import csv
 import numpy as np
 from satnav.dynamics import circular_state, propagate, invariants
-from satnav.elm import ELM
+from satnav.elm_model import ELM
 
 times, states = propagate(circular_state(), duration_s=5400, dt_s=10)
 energy, h = invariants(states)
