@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 from satnav.dynamics import circular_state, propagate, invariants
-from satnav.elm import ELM
+from satnav.elm_model import ELM
 
 class BaselineTests(unittest.TestCase):
     def test_orbit_invariants(self):
