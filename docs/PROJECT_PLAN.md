@@ -146,17 +146,19 @@ These are **one-step, teacher-forced** predictions against NASA OEM operational 
 
 Before ridge regularization was implemented, we ran `scripts/iss_experiments.py` on the NASA ISS OEM dataset with a chronological **70% train / 30% test** split and a 240-second one-step prediction horizon. The best reported physics-residual ELM among the originally tested 32/64/128/256-neuron configurations used **64 hidden neurons**, **no ridge penalty (λ = 0)**, and either QR or SVD (the two solvers agreed numerically):
 
-| Metric | Pre-ridge 64-neuron residual ELM |
-| --- | ---: |
-| Position RMSE | **43.177127 m** |
-| Velocity RMSE | **0.354082 m/s** |
-| Hidden neurons | 64 |
-| Ridge λ | 0 (unregularized) |
-| Solver | QR and SVD gave effectively identical prediction errors |
-| Test design | Chronological 70/30, one-step (240 s), teacher-forced |
-| Physics-only RK4 position RMSE on that test split | 377.616274 m |
+#### Comparing our two experiments
 
-After introducing ridge and chronological **60% train / 20% validation / 20% test** selection, the user-reported selected configuration was physics-residual ELM with **128 neurons, λ = 0.0001, QR**, giving **6.994822 m validation** and **7.351744 m final-test** position RMSE.
+| Configuration | Earlier experiment | New experiment |
+| --- | --- | --- |
+| Architecture | Physics-residual ELM | Physics-residual ELM |
+| Hidden neurons | 64 | 128 |
+| Ridge \(\lambda\) | 0 | 0.0001 |
+| Solver | QR or SVD | QR |
+| Position RMSE | **43.177 m** | **7.352 m** |
+| Velocity RMSE | **0.354 m/s** | **0.0607 m/s** |
+| Evaluation | 70/30 split | 60/20/20 split |
+
+Both RMSE columns report one-step, 240-second held-out test errors against NASA OEM operational ephemeris. The new experiment selected its configuration using validation data; its validation position RMSE was **6.994822 m**. The earlier experiment's physics-only RK4 baseline had **377.616274 m** position RMSE on its original test split.
 
 **Do not interpret 43.177 m versus 7.352 m as a controlled measure of ridge's improvement.** The neuron count, train/test boundaries, training amount, and evaluated timestamps differ. To isolate ridge's effect, compare λ = 0 with λ = 0.0001 at the *same* hidden-neuron count and solver using the *same validation split*, as recorded in `results/iss/validated/validation_grid.csv`. For a clean final test, select hyperparameters using validation only.
 
