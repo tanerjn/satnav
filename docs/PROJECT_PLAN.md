@@ -142,6 +142,34 @@ Inspect:
 
 These are **one-step, teacher-forced** predictions against NASA OEM operational ephemeris, not independent measured ground truth or multi-step free-running forecasts. The earlier 43.177 m result used a different split and is not directly comparable. The reported 7.352 m is not a guaranteed accuracy on future ISS ephemerides.
 
+### 2B.1. Historical pre-ridge baseline and interpretation
+
+Before ridge regularization was implemented, we ran `scripts/iss_experiments.py` on the NASA ISS OEM dataset with a chronological **70% train / 30% test** split and a 240-second one-step prediction horizon. The best reported physics-residual ELM among the originally tested 32/64/128/256-neuron configurations used **64 hidden neurons**, **no ridge penalty (λ = 0)**, and either QR or SVD (the two solvers agreed numerically):
+
+| Metric | Pre-ridge 64-neuron residual ELM |
+| --- | ---: |
+| Position RMSE | **43.177127 m** |
+| Velocity RMSE | **0.354082 m/s** |
+| Hidden neurons | 64 |
+| Ridge λ | 0 (unregularized) |
+| Solver | QR and SVD gave effectively identical prediction errors |
+| Test design | Chronological 70/30, one-step (240 s), teacher-forced |
+| Physics-only RK4 position RMSE on that test split | 377.616274 m |
+
+After introducing ridge and chronological **60% train / 20% validation / 20% test** selection, the user-reported selected configuration was physics-residual ELM with **128 neurons, λ = 0.0001, QR**, giving **6.994822 m validation** and **7.351744 m final-test** position RMSE.
+
+**Do not interpret 43.177 m versus 7.352 m as a controlled measure of ridge's improvement.** The neuron count, train/test boundaries, training amount, and evaluated timestamps differ. To isolate ridge's effect, compare λ = 0 with λ = 0.0001 at the *same* hidden-neuron count and solver using the *same validation split*, as recorded in `results/iss/validated/validation_grid.csv`. For a clean final test, select hyperparameters using validation only.
+
+#### Meaning of ridge λ = 0.0001
+
+ELM fits the output-weight matrix β from hidden-layer features H and normalized training targets Y. Without regularization, it minimizes `||Hβ − Y||_F²`. With ridge (Tikhonov) regularization, it minimizes:
+
+```text
+||Hβ − Y||_F² + λ ||β||_F²
+```
+
+For **λ = 0.0001 = 10⁻⁴**, a small positive penalty discourages excessively large output coefficients and can reduce sensitivity to nearly dependent hidden features. λ is a *weight penalty*, not a position-error tolerance, percentage improvement, or measurement unit. Its effective strength depends on feature/target scaling and the scale of H; in our script, normalization is fitted on the training subset. Ridge is implemented using regularized singular-value factors for SVD and an augmented least-squares system for QR, avoiding an explicit normal-equation inverse.
+
 ### 2C. Additional checks before marking Phase 2 complete
 
 1. Inspect `validation_grid.csv` for finite RMSE and compare QR/SVD accuracy at identical architecture, neuron count and λ.
