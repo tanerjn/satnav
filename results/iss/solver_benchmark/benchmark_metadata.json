@@ -1,0 +1,23 @@
+{
+  "source": "data/iss/processed/nasa_iss_states.csv",
+  "train_pairs": 3238,
+  "warmups": 2,
+  "repeats": 7,
+  "seed": 42,
+  "hidden": [
+    16,
+    32,
+    64,
+    128,
+    256
+  ],
+  "ridge": [
+    0.0,
+    1e-06,
+    0.0001,
+    0.01,
+    1.0
+  ],
+  "timing": "solver only, repeated on fixed H and normalized Y; system BLAS threading affects results",
+  "warning": "SVD/QR numerical agreement may degrade for highly ill-conditioned unregularized systems"
+}
