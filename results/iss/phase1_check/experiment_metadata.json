@@ -1,0 +1,9 @@
+{
+  "source": "data/iss/processed/nasa_iss_states.csv",
+  "states": 5403,
+  "dt_s": 240,
+  "train_pairs": 3779,
+  "test_pairs": 1617,
+  "excluded_pairs": 5,
+  "note": "OEM is operational ephemeris, not raw ground truth. One-step is teacher-forced; recursive is free-run."
+}

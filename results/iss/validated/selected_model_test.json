@@ -1,0 +1,22 @@
+{
+  "selected_on_validation": {
+    "model": "physics_residual_elm",
+    "hidden": 128,
+    "ridge": 0.0001,
+    "solver": "qr",
+    "position_rmse_m": 6.994822278665581,
+    "velocity_rmse_mps": 0.0576239141988802
+  },
+  "test_metrics": {
+    "position_rmse_m": 7.35174431230812,
+    "velocity_rmse_mps": 0.060672346698735155
+  },
+  "split": {
+    "train_states": 3241,
+    "validation_states": 1081,
+    "test_states": 1081,
+    "validation_pairs": 1080,
+    "test_pairs": 1077
+  },
+  "note": "One-step teacher-forced comparison to NASA OEM operational ephemeris; not independent ground truth. Selection uses validation only."
+}
