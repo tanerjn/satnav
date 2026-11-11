@@ -189,3 +189,45 @@ For **λ = 0.0001 = 10⁻⁴**, a small positive penalty discourages excessively
 - **Phase 2:** ELM architectures, QR/SVD, ridge and chronological validation implemented; first validation/test run completed. Still requires solver-consistency check execution, repeated runtime/stability benchmarks, and final independent evaluation.
 - **Phase 3:** Full aligned head-to-head model comparison and multi-horizon experiments remain future work.
 - **Phase 4:** Final report, tables, figures and reproducibility discussion remain future work.
+
+
+## Phase 1 and Phase 2 closure checks (November 2026 implementation)
+
+The following scripts are now available, but their outputs must be checked on the actual NASA OEM and TLE inputs before declaring either phase closed.
+
+### Phase 1: OEM metadata and same-epoch comparison
+
+```bash
+python -m pip install -r requirements-project.txt
+PYTHONPATH=src python scripts/check_iss_oem_metadata.py \
+  --oem data/iss/nasa_oem/ISS.OEM_J2K_EPH.txt
+```
+
+Confirm that the reported `REF_FRAME`, `TIME_SYSTEM`, and `CENTER_NAME` match the assumptions. This metadata inspection **does not** mathematically establish that GCRS and EME2000/J2000 are identical; a validated transformation or a documented accuracy bound is still needed. The parser checks declared metadata only, not all possible OEM segment semantics.
+
+To compare SGP4 and the validation-selected ELM on **identical final-test timestamps**:
+
+```bash
+PYTHONPATH=src python scripts/compare_iss_aligned.py \
+  --csv data/iss/processed/nasa_iss_states.csv \
+  --selected results/iss/validated/selected_model_test.json \
+  --tle data/iss/celestrak/iss.tle \
+  --max-age-days 2
+```
+
+The script prints matched test pairs, total test pairs, the epoch window, and both RMSEs. If no matching final-test epochs exist, it **fails deliberately**: obtain an ISS TLE near the final 20% of OEM epochs. The earlier 2026-11-11 TLE is unlikely to overlap the November 21–24 final test period. A single TLE is still a limited comparison; use epoch-matched historical GP/TLE records for a comprehensive Phase 1 evaluation. SGP4/TEME is converted to GCRS, and the residual frame-definition caveat remains.
+
+### Phase 2: repeated QR/SVD benchmark
+
+```bash
+PYTHONPATH=src python scripts/benchmark_iss_solvers.py \
+  --hidden 16 32 64 128 256 \
+  --ridge 0 0.000001 0.0001 0.01 1 \
+  --warmups 2 --repeats 7
+```
+
+Inspect `results/iss/solver_benchmark/solver_benchmark.csv` and `benchmark_metadata.json`. For each direct/residual ELM family, neuron count, ridge value and solver, the benchmark reports median/min/max/standard deviation of solver time, least-squares residual Frobenius norm, coefficient Frobenius norm, ridge objective, hidden-matrix rank and condition number, and QR/SVD coefficient difference when both succeed. QR and SVD operate on the **same fixed hidden matrix and normalized targets**. Timings exclude feature construction, scaling and physics propagation; OS load and BLAS threading can affect the measurements.
+
+**Acceptance checks:** all reported metrics finite where mathematically expected; QR/SVD residuals and coefficients agree closely for well-conditioned cases; ridge coefficients and objectives behave consistently with the regularized objective; report performance as distributions across repeats rather than claiming a universal fastest solver. Very ill-conditioned unregularized cases may have larger solver differences and should be analyzed, not hidden.
+
+**Closure criteria:** Phase 1 needs OEM frame-definition validation and matching historical TLE coverage; Phase 2 needs the benchmark and numerical consistency checks executed and inspected. The aligned SGP4 comparison is one-step teacher-forced for ELM and single-TLE propagation for SGP4, so a future multi-horizon, apples-to-apples forecasting study remains Phase 3.
