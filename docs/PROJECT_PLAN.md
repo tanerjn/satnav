@@ -158,6 +158,8 @@ Before ridge regularization was implemented, we ran `scripts/iss_experiments.py`
 | Velocity RMSE | **0.354 m/s** | **0.0607 m/s** |
 | Evaluation | 70/30 split | 60/20/20 split |
 
+The earlier **70/30 split** used the first 70% of chronologically ordered ISS states for training and the remaining 30% for testing, without a separate validation set. The newer **60/20/20 split** used 60% for training, 20% for selecting the hidden-neuron count, ridge parameter, and solver, and the final 20% for testing after refitting the selected model on the first 80%. Both results are **one-step (240-second), teacher-forced predictions** from observed ISS states, rather than free-running predictions of an entire future orbit.
+
 Both RMSE columns report one-step, 240-second held-out test errors against NASA OEM operational ephemeris. The new experiment selected its configuration using validation data; its validation position RMSE was **6.994822 m**. The earlier experiment's physics-only RK4 baseline had **377.616274 m** position RMSE on its original test split.
 
 **Do not interpret 43.177 m versus 7.352 m as a controlled measure of ridge's improvement.** The neuron count, train/test boundaries, training amount, and evaluated timestamps differ. To isolate ridge's effect, compare λ = 0 with λ = 0.0001 at the *same* hidden-neuron count and solver using the *same validation split*, as recorded in `results/iss/validated/validation_grid.csv`. For a clean final test, select hyperparameters using validation only.
