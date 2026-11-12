@@ -1,0 +1,60 @@
+{
+  "catalog": "data/starlink/processed/45755/tle_catalog.csv",
+  "norad_cat_id": 45755,
+  "method": "Earlier TLE SGP4 forecast vs later TLE SGP4 state at later epoch",
+  "reference_frame": "TEME",
+  "position_unit": "m",
+  "velocity_unit": "m/s",
+  "tolerance_hours": 2,
+  "horizons": [
+    {
+      "requested_horizon_hours": 1,
+      "samples": 29,
+      "position_rmse_m": 5498.63426840999,
+      "velocity_rmse_mps": 6.302481970877597,
+      "actual_horizon_min_hours": 2.4e-07,
+      "actual_horizon_max_hours": 2.00055576
+    },
+    {
+      "requested_horizon_hours": 6,
+      "samples": 59,
+      "position_rmse_m": 7236.652202455408,
+      "velocity_rmse_mps": 7.970642528122785,
+      "actual_horizon_min_hours": 4.0000000799999995,
+      "actual_horizon_max_hours": 7.9999999200000005
+    },
+    {
+      "requested_horizon_hours": 12,
+      "samples": 45,
+      "position_rmse_m": 18712.403146523942,
+      "velocity_rmse_mps": 20.817497384888348,
+      "actual_horizon_min_hours": 10.000000080000001,
+      "actual_horizon_max_hours": 13.999999919999999
+    },
+    {
+      "requested_horizon_hours": 24,
+      "samples": 73,
+      "position_rmse_m": 144763.98113151328,
+      "velocity_rmse_mps": 161.02288067883308,
+      "actual_horizon_min_hours": 22.00000008,
+      "actual_horizon_max_hours": 25.99999992
+    },
+    {
+      "requested_horizon_hours": 72,
+      "samples": 65,
+      "position_rmse_m": 2504885.1050781016,
+      "velocity_rmse_mps": 2801.003042617527,
+      "actual_horizon_min_hours": 70.00000008,
+      "actual_horizon_max_hours": 73.99972248
+    },
+    {
+      "requested_horizon_hours": 168,
+      "samples": 46,
+      "position_rmse_m": 9738393.412937772,
+      "velocity_rmse_mps": 10951.372005056544,
+      "actual_horizon_min_hours": 166.00000008,
+      "actual_horizon_max_hours": 169.99972224
+    }
+  ],
+  "caveat": "Later TLE states are independently updated model estimates, not ground-truth observations. Some forecast/reference estimates may share underlying tracking observations. Comparisons are descriptive and overlap across horizons."
+}

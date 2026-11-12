@@ -1,0 +1,60 @@
+{
+  "catalog": "data/starlink/processed/45695/tle_catalog.csv",
+  "norad_cat_id": 45695,
+  "method": "Earlier TLE SGP4 forecast vs later TLE SGP4 state at later epoch",
+  "reference_frame": "TEME",
+  "position_unit": "m",
+  "velocity_unit": "m/s",
+  "tolerance_hours": 2,
+  "horizons": [
+    {
+      "requested_horizon_hours": 1,
+      "samples": 20,
+      "position_rmse_m": 8944.432260242285,
+      "velocity_rmse_mps": 10.312728551411015,
+      "actual_horizon_min_hours": 2.4e-07,
+      "actual_horizon_max_hours": 2.00083344
+    },
+    {
+      "requested_horizon_hours": 6,
+      "samples": 46,
+      "position_rmse_m": 33895.053185149816,
+      "velocity_rmse_mps": 37.326311927611705,
+      "actual_horizon_min_hours": 4.0000000799999995,
+      "actual_horizon_max_hours": 7.9999999200000005
+    },
+    {
+      "requested_horizon_hours": 12,
+      "samples": 40,
+      "position_rmse_m": 21219.334438671434,
+      "velocity_rmse_mps": 23.722900251137975,
+      "actual_horizon_min_hours": 10.00000032,
+      "actual_horizon_max_hours": 13.999999919999999
+    },
+    {
+      "requested_horizon_hours": 24,
+      "samples": 63,
+      "position_rmse_m": 141699.1631716308,
+      "velocity_rmse_mps": 156.2471001265476,
+      "actual_horizon_min_hours": 22.00000008,
+      "actual_horizon_max_hours": 25.99972224
+    },
+    {
+      "requested_horizon_hours": 72,
+      "samples": 56,
+      "position_rmse_m": 1745871.2578116788,
+      "velocity_rmse_mps": 1933.8554449977485,
+      "actual_horizon_min_hours": 70.00000008,
+      "actual_horizon_max_hours": 73.99972248
+    },
+    {
+      "requested_horizon_hours": 168,
+      "samples": 36,
+      "position_rmse_m": 10254835.763612004,
+      "velocity_rmse_mps": 11421.164417354905,
+      "actual_horizon_min_hours": 166.00000008,
+      "actual_horizon_max_hours": 169.99999992
+    }
+  ],
+  "caveat": "Later TLE states are independently updated model estimates, not ground-truth observations. Some forecast/reference estimates may share underlying tracking observations. Comparisons are descriptive and overlap across horizons."
+}
