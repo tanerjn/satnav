@@ -1,0 +1,25 @@
+{
+  "tle_file": "data/iss/spacetrack/iss.tle",
+  "oem_file": "data/iss/processed/nasa_iss_states.csv",
+  "tle_epoch_utc": "2026-11-11T08:03:57.286080+00:00",
+  "matched_oem_epochs": 1381,
+  "first_matched_epoch_utc": "2026-11-09T12:00:00+00:00",
+  "last_matched_epoch_utc": "2026-11-13T08:00:00+00:00",
+  "max_tle_age_days": 2.0,
+  "frame_method": "TEME -> Astropy GCRS -> ERFA/SOFA IAU 2000 bp00 rb mean-J2000 frame bias",
+  "frame_difference": {
+    "position_rms_m": 0.582731861788448,
+    "position_max_m": 0.7636360973284674,
+    "velocity_rms_mps": 0.0006562682284000664,
+    "velocity_max_mps": 0.0008596470797237229
+  },
+  "sgp4_gcrs_vs_oem": {
+    "position_rmse_m": 901.215456763843,
+    "velocity_rmse_mps": 0.9900355695260913
+  },
+  "sgp4_eme2000_vs_oem": {
+    "position_rmse_m": 901.4506573168414,
+    "velocity_rmse_mps": 0.9903054924829588
+  },
+  "caveat": "OEM declares EME2000, but its precise frame realization is not independently validated. The IAU 2000 frame-bias rotation gives a defined mean-J2000 convention, not a proof of NASA OEM frame equivalence. Differences in RMSE cannot be uniquely attributed to frame mismatch versus propagation error."
+}
