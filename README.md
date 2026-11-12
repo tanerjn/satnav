@@ -1,3 +1,7 @@
+<img width="227" height="239" alt="Screenshot 2026-11-12 at 12 36 59" src="https://github.com/user-attachments/assets/bc10807e-b33d-46f0-9bb0-fc335cc8b57d" />
+
+
+
 # ISS Satellite State Prediction — Numerical Methods and Physics-Informed ELM
 
 Reproducible numerical study of **International Space Station (ISS, NORAD 25544)** orbital-state prediction using NASA operational ephemerides, a two-body Runge–Kutta baseline, SGP4/TLE propagation, and Extreme Learning Machines (ELMs). The project investigates how **QR versus SVD least-squares solvers**, ridge regularization, and physics-informed residual learning affect accuracy, conditioning and computational cost.
