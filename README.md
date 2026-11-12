@@ -108,6 +108,10 @@ PYTHONPATH=src python scripts/verify_iss_frames.py \
 
 This reports the RMS/max frame differences and SGP4/OEM RMSE under both conventions. It does **not** certify exact OEM frame equivalence.
 
+![SGP4/OEM RMSE in GCRS and mean-J2000 frames](results/iss/figures/frame_comparison.png)
+
+*Phase 1 frame diagnostic: RMSE against NASA OEM under two frame conventions. The exact OEM EME2000 realization is not independently certified.*
+
 ### Phase 2 — Validate ELMs and benchmark numerical solvers
 
 **5. Select hyperparameters chronologically (60% train / 20% validation / 20% test).**
@@ -120,6 +124,10 @@ PYTHONPATH=src python scripts/iss_validate.py \
 
 Output: `results/iss/validated/validation_grid.csv` and `selected_model_test.json`. The validation segment selects architecture, hidden size, ridge coefficient and QR/SVD solver; the selected configuration is refitted on the first 80% before the final 20% test. The test measures **one-step agreement with NASA OEM**, not independent future forecasting.
 
+![ELM validation position RMSE by hidden size](results/iss/figures/validation_position_rmse.png)
+
+*Validation-set position RMSE across hidden sizes and model families; these are not final held-out test errors.*
+
 **6. Benchmark QR versus SVD on the same fixed ELM hidden-feature matrices.**
 
 ```bash
@@ -130,6 +138,10 @@ PYTHONPATH=src python scripts/benchmark_iss_solvers.py \
 ```
 
 Output: `results/iss/solver_benchmark/solver_benchmark.csv` and `benchmark_metadata.json`. Timing measures **solver-only** time, excluding feature construction and orbital propagation.
+
+![QR versus SVD solver-only runtime](results/iss/figures/solver_runtime.png)
+
+*Median QR and SVD solver-only runtimes for the physics-residual ELM (ridge λ = 0.0001); excludes feature construction.*
 
 ### Generate plots
 
