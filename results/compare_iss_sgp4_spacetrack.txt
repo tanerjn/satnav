@@ -1,0 +1,3 @@
+TLE epoch UTC: 2026-11-11 08:03:57.286073+00:00 Matched OEM epochs: 1381
+Exploratory TEME->GCRS vs OEM: {'position_rmse_m': 901.215456763843, 'velocity_rmse_mps': 0.9900355695260913}
+WARNING: GCRS and OEM J2000/EME2000 are not guaranteed identical.
