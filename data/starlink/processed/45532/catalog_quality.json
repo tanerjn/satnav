@@ -1,0 +1,19 @@
+{
+  "source": "data/starlink/STARLINK-45532_2026-01-01_2026-02-01.json",
+  "norad_cat_id": 45532,
+  "total_records": 93,
+  "valid_records": 93,
+  "invalid_records": 0,
+  "invalid_examples": [],
+  "duplicate_epochs": 4,
+  "unique_epochs": 89,
+  "first_epoch_utc": "2026-01-01T00:00:02.999808+00:00",
+  "last_epoch_utc": "2026-01-31T22:00:03.000096+00:00",
+  "min_gap_hours": 2.4e-07,
+  "median_gap_hours": 5.999722080000001,
+  "max_gap_hours": 77.56598112,
+  "gap_count_over_24h": 6,
+  "reference_frame": "TEME",
+  "time_system": "UTC",
+  "note": "Later OMM/TLE sets are updated orbital estimates, not independent truth. Do not use future records as training inputs for historical forecasts."
+}
