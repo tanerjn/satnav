@@ -230,7 +230,7 @@ def main():
             protocol='training reference creation <= train cutoff; validation uses later origins',
             warning='The 30% validation set selects ridge/alpha AND reports RMSE; '
                     'these are not unbiased held-out test metrics. '
-                    'No independent test split exists.'), indent=2)+'\\n')
+                    'No independent test split exists.'), indent=2)+'\n')
         print(norad, [(m['horizon_hours'], m['status'],
                       m.get('sgp4_rmse_km'), m.get('direct_elm_rmse_km'),
                       m.get('residual_elm_rmse_km')) for m in metrics])
