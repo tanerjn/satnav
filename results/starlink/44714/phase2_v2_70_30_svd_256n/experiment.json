@@ -1,0 +1,32 @@
+{
+  "norads": [
+    44714
+  ],
+  "catalog_root": "data/starlink/processed",
+  "results_root": "results/starlink",
+  "hidden": 256,
+  "solver": "svd",
+  "seed": 42,
+  "train_fraction": 0.7,
+  "ridges": [
+    0.01,
+    0.1,
+    1,
+    10,
+    100
+  ],
+  "alphas": [
+    0,
+    0.25,
+    0.5,
+    1
+  ],
+  "min_train": 8,
+  "min_val": 3,
+  "min_test": 3,
+  "norad_cat_id": 44714,
+  "split": "chronological 70/30 by distinct forecast origins",
+  "reference": "retrospective later-TLE SGP4 estimate, not truth",
+  "protocol": "training reference creation <= train cutoff; validation uses later origins",
+  "warning": "The 30% validation set selects ridge/alpha AND reports RMSE; these are not unbiased held-out test metrics. No independent test split exists."
+}
