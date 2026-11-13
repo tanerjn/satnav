@@ -1,0 +1,11 @@
+{
+  "norad_cat_id": 45532,
+  "train_fraction": 0.7,
+  "hidden": 128,
+  "ridge": 0.001,
+  "solver": "svd",
+  "seed": 42,
+  "reference": "later TLE-derived SGP4, not ground truth",
+  "leakage_policy": "training reference creation <= split; test origin >= split",
+  "caveat": "Small, irregular TLE samples. Models are per-horizon and per-satellite. No RK4 in Phase 2; test metrics are exploratory, not final benchmark."
+}
