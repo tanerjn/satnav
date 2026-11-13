@@ -1,0 +1,37 @@
+{
+  "norads": [
+    45532,
+    45695,
+    45755,
+    46563
+  ],
+  "catalog_root": "data/starlink/processed",
+  "results_root": "results/starlink",
+  "hidden": 32,
+  "solver": "svd",
+  "seed": 42,
+  "train_fraction": 0.55,
+  "val_fraction": 0.2,
+  "ridges": [
+    0.01,
+    0.1,
+    1,
+    10,
+    100
+  ],
+  "alphas": [
+    0,
+    0.25,
+    0.5,
+    1
+  ],
+  "min_train": 8,
+  "min_val": 3,
+  "min_test": 3,
+  "norad_cat_id": 45532,
+  "reference": "retrospective later-TLE SGP4 estimate, not truth",
+  "protocol": "chronological origin split; reference creation before split cutoff",
+  "direct": "target TEME position in origin-fixed RTN coordinates",
+  "residual": "target RTN correction to SGP4; validation-selected alpha includes zero",
+  "warning": "Validation-selected fallback does not guarantee test improvement; Phase 2 v2 has a different test set than Phase 2 v1."
+}
