@@ -1,0 +1,60 @@
+{
+  "norad_cat_id": 45532,
+  "catalog": "data/starlink/processed/45532/tle_catalog.csv",
+  "method": "SGP4 forward from available TLE versus later TLE estimate at exact target",
+  "reference_frame": "TEME",
+  "horizons": [
+    {
+      "horizon_hours": 1,
+      "samples": 56,
+      "position_rmse_m": 23336.219807362424,
+      "velocity_rmse_mps": 25.67490447491479,
+      "no_reference": 33,
+      "propagation_error": 0
+    },
+    {
+      "horizon_hours": 6,
+      "samples": 55,
+      "position_rmse_m": 79108.43457696766,
+      "velocity_rmse_mps": 88.21536416290672,
+      "no_reference": 34,
+      "propagation_error": 0
+    },
+    {
+      "horizon_hours": 12,
+      "samples": 49,
+      "position_rmse_m": 136647.0059214466,
+      "velocity_rmse_mps": 153.2317909367086,
+      "no_reference": 40,
+      "propagation_error": 0
+    },
+    {
+      "horizon_hours": 24,
+      "samples": 50,
+      "position_rmse_m": 274409.26436922926,
+      "velocity_rmse_mps": 309.1605862200037,
+      "no_reference": 39,
+      "propagation_error": 0
+    },
+    {
+      "horizon_hours": 72,
+      "samples": 37,
+      "position_rmse_m": 1840638.84722277,
+      "velocity_rmse_mps": 2073.892198815302,
+      "no_reference": 52,
+      "propagation_error": 0
+    },
+    {
+      "horizon_hours": 168,
+      "samples": 29,
+      "position_rmse_m": 4759190.96756332,
+      "velocity_rmse_mps": 5365.585208301938,
+      "no_reference": 60,
+      "propagation_error": 0
+    }
+  ],
+  "reference_epoch_tolerance_hours": 3,
+  "forecast_origin_policy": "max(source orbital epoch, source creation UTC)",
+  "reference_policy": "closest reference orbital epoch within tolerance, created at or after exact target",
+  "caveat": "Reference states are SGP4-generated from later TLEs, not independent measured truth. Forecast origins may overlap; differences can reflect maneuvers and TLE fitting."
+}
